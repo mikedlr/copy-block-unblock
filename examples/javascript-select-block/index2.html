@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script language='JavaScript1.2'>
+      document.addEventListener('copy', function(e) {
+      e.clipboardData.setData('text/plain', 'Please do not copy text');
+      e.clipboardData.setData('text/html', '<b>Please do not copy text</b>');
+      e.preventDefault();
+      });
+    </script>
+  </head>
+  <body>
+    <p>
+      copying this text won't work, you get a message not to copy
+    </p>
+  </body>
+</html>

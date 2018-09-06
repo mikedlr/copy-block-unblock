@@ -1,0 +1,8 @@
+Comprehensive statement of how to disable selection using CSS +
+javascript for browsers where that doesn't work.
+
+https://evanhahn.com/how-to-disable-copy-paste-on-your-website/
+
+
+https://addons.mozilla.org/en-GB/firefox/addon/absolute-enable-right-click/reviews/?page=1
+
