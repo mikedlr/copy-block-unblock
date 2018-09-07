@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  
+  <head>
+    <script language='JavaScript1.2'>
+        function blockTextSelection(){
+	    window.console&&console.log('blockTextSelection');
+	    var style=document.createElement('style');
+	    style.type='text/css';
+	    style.innerHTML='*,p,div{ user-select:none !important;\
+				  -moz-user-select:none !important;\
+				  -webkit-user-select:none !important;\
+	                     }';
+	    document.head.appendChild(style);
+	    var elArray=document.body.getElementsByTagName('*');
+	    if(elArray.length){
+		for(var i=0; i<elArray.length; i++){
+		    var el=elArray[i];
+		    el.onselectstart=el.ondragstart=el.ondrag=el.oncontextmenu=el.onmousedown=el.onmouseup=function(){return false};
+		    if(el instanceof HTMLInputElement&&['text','password','email','number','tel','url'].indexOf(el.type.toLowerCase())>-1){
+			el.addAttribute('disabled');
+			el.onkeydown=el.onkeyup=function(){return false};
+		    }
+		}
+	    }
+	}
+        window.onload = function(){
+	    blockTextSelection();
+	}
+
+	blockFunction=(function(){
+	    document.onselectstart = new Function ("return false");
+	    document.addEventListener(
+		'copy',
+		function(e) {
+		    e.clipboardData.setData('text/plain', 'Please do not copy text');
+		    e.clipboardData.setData('text/html', '<b>Please do not copy text</b>');
+		    e.preventDefault();
+		})
+	    }
+        );
+
+
+        var startIntervals = function() {
+	    var d = new Date();
+	    var last11=0;
+	    var last13=0;
+	    var last17=0;
+	    var last19=0;
+	    var safetycount=5; 
+
+	    var ensureInterval = function() {
+		var timenow=d.getTime();
+		if ( (timenow - 11 * safetycount ) > last11 ) {
+		    window.setInterval(
+			function(){
+			    blockFunction();
+			    last11=d.getTime();
+			    ensureInterval()
+			}, 11)
+		}
+		if ( (timenow - 13 * safetycount ) > last13 ) {
+		    window.setInterval(
+			function(){
+			    blockFunction();
+			    last13=d.getTime();
+			    ensureInterval()
+			}, 13)
+		}
+		if ( (timenow - 17 * safetycount ) > last17 ) {
+		    window.setInterval(
+			function(){
+			    blockFunction();
+			    last17=d.getTime();
+			    ensureInterval()
+			}, 17)
+		}
+		if ( (timenow - 19 * safetycount ) > last19 ) {
+		    window.setInterval(
+			function(){
+			    blockFunction();
+			    ensureInterval()
+			    last19=d.getTime();
+			}, 19)
+		}
+	    
+	    }
+	}
+    </script>
+
+  <body>
+    <p>
+      All text in this document should be unselectable. Even if you run a script or console command to re-enable select.  
+    </p>
+    <p>
+      Unselectable text.
+    </p>
+    </div>
+  </body>
+</html>
